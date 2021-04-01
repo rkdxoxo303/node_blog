@@ -24,7 +24,8 @@
 
 
 <details>
-## <summary> API </summary>
+ ## API
+<summary></summary>
  <div markdown="1">
 
 | 기능                     | Method | URL                              | Request                                                      | Response                                                     |
