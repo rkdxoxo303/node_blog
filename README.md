@@ -65,6 +65,9 @@
 </summary>
 <div markdown="1">       
 
+![image](https://user-images.githubusercontent.com/78591345/113245869-ca609400-92f2-11eb-8102-97625622c541.PNG)
+![image](https://user-images.githubusercontent.com/78591345/113245870-caf92a80-92f2-11eb-802f-c281cd95d1c7.PNG)
+
 
 ```js
 const postUsersSchema = Joi.object({
@@ -151,7 +154,10 @@ url : api/users/me
 
 <details>
 <summary>게시글 수정 버튼 보이기 / 안 보이기</summary>
-<div markdown="1">    
+<div markdown="1"> 
+  
+![image](https://user-images.githubusercontent.com/78591345/113245861-c896d080-92f2-11eb-8b75-02c4cd128e6d.PNG)
+![image](https://user-images.githubusercontent.com/78591345/113245863-c92f6700-92f2-11eb-9e67-b279fe00733c.PNG)
 
 ```js
 router.post("/comment_fix_button/:blogsId", async (req, res) => {
@@ -242,6 +248,12 @@ router.post("/comment_save/:blogsId", async (req, res, next) => {
 <details>
 <summary>댓글 & 새글 실시간 알람</summary>
 <div markdown="1">   
+  
+ ![image](https://user-images.githubusercontent.com/78591345/113246383-e7e22d80-92f3-11eb-93cd-f30b20bf1be2.PNG)
+ ![image](https://user-images.githubusercontent.com/78591345/113246385-e87ac400-92f3-11eb-8813-5ddc2fcee2a5.PNG)
+ 
+ - 접속해있는 모든 사람에게 알람이 가며, 글을 선택하면 해당 페이지로 이동한다.
+
 
 서버쪽
 
@@ -305,6 +317,8 @@ io.on("connection", (sock) => {
 <details>
 <summary>게시글 저장 & 파일 업로드</summary>
 <div markdown="1">       
+
+![image](https://user-images.githubusercontent.com/78591345/113246485-1233eb00-92f4-11eb-8f6e-1d3e1c86c292.PNG)
 
 ```js
 router.post("/save", upload.single('file'), async (req, res, next) => {
@@ -371,6 +385,8 @@ router.post("/save", upload.single('file'), async (req, res, next) => {
 <div markdown="1">  
 
 몽고DB를 사용했다.
+
+![image](https://user-images.githubusercontent.com/78591345/113245860-c896d080-92f2-11eb-9ecf-2b78917b5ce1.PNG)
 
 blogs
 
