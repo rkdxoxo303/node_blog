@@ -14,10 +14,6 @@
 
 ## 구현한 기능
 
-<details>
-<summary> </summary>
-<div markdown="1">  
-
 로그인 & 회원가입
 
 게시글 및 댓글 CRUD
@@ -26,13 +22,10 @@
 
 파일 업로드
 
-</div>
-</details>
-
 
 
 ## API
-<details> <summary> API </summary> <div markdown="1">     
+<details> <summary> </summary> <div markdown="1">     
 
 
 | 기능                     | Method | URL                              | Request                                                      | Response                                                     |
