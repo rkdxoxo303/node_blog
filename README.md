@@ -74,7 +74,7 @@ const postUsersSchema = Joi.object({
 
 joi를 사용하여, 스트링에 제약을 두었다.
 
-```
+```js
 router.post("/users", async (req, res) => {
   try {
     const { nickname, email, password, confirmPassword } = await postUsersSchema.validateAsync(req.body);
@@ -95,7 +95,7 @@ router.post("/users", async (req, res) => {
 
 회원가입은 클라이언트에서 정보를 받아온 후 비밀번호와 비밀번호 확인이 일치하면 통과하고, 아니면 에러 메시지를 보냈다. 패스워드에 아이디값이 들어있는 것, 양식 문제 등 모두  if로 설정했다.
 
-```
+```js
 router.post("/auth", async (req, res) => {
   try {
     const { email, password } = await postAuthSchema.validateAsync(req.body);
@@ -124,7 +124,7 @@ router.post("/auth", async (req, res) => {
 
 로그인에 성공하면 jwt토큰을 주고, 비밀번호는 bcrypt를 이용하여 암호화해서 DB에 넣었다.
 
-```
+```js
 router.get("/users/me", authMiddleware, async (req, res) => {
   const { user } = res.locals;
   res.send({
@@ -145,7 +145,7 @@ url : api/users/me
 
 ### 게시글 수정 버튼 보이기 / 안 보이기
 
-```
+```js
 router.post("/comment_fix_button/:blogsId", async (req, res) => {
 
   const { blogsId } = req.params;
@@ -175,7 +175,7 @@ router.post("/comment_fix_button/:blogsId", async (req, res) => {
 
 ### 댓글
 
-```
+```js
 // 댓글을 저장한다.
 router.post("/comment_save/:blogsId", async (req, res, next) => {
 
@@ -229,7 +229,7 @@ router.post("/comment_save/:blogsId", async (req, res, next) => {
 
 서버쪽
 
-```
+```js
 io.on("connection", (sock) => {
 
     sock.on("SAVE", (data) => {
@@ -244,7 +244,7 @@ io.on("connection", (sock) => {
 
 클라이언트쪽
 
-```
+```js
         const socket = io.connect('/')
 
         socket.on('SAVE_REVIEW', function (data) {
@@ -285,7 +285,7 @@ io.on("connection", (sock) => {
 
 ### 게시글 저장 & 파일 업로드
 
-```
+```js
 router.post("/save", upload.single('file'), async (req, res, next) => {
 
   let file_name = ""
