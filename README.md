@@ -25,6 +25,11 @@
 
 
 ## API
+<details>
+<summary> </summary>
+<div markdown="1">     
+
+
 | 기능                     | Method | URL                              | Request                                                      | Response                                                     |
 | ------------------------ | ------ | -------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 회원가입                 | POST   | /api/users                       | nickname,<br />email,<br />password,<br />confirmPassword    | 오류시 status(400)                                           |
@@ -50,7 +55,8 @@
 | 실시간 알림              |        | "SAVE"                           | nickname,<br />goodsId,<br />goodsName                       | 'SAVE_REVIEW'                                                |
 |                          |        | "SAVE_REVIEW"                    |                                                              | nicakname,<br />goodsId,<br />goodsName,<br />date<br />     |
 
-
+</div>
+</details>
 
 
 ## 코드 셀프 리뷰
