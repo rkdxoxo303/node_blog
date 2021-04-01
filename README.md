@@ -1,6 +1,8 @@
 # Node-Blog
 개인 미니프로젝트
 
+http://3.35.175.76/home
+
 ![image](https://user-images.githubusercontent.com/78591345/113245864-c9c7fd80-92f2-11eb-8e8d-602bac970330.PNG)
 
 ------
