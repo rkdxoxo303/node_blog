@@ -1,26 +1,71 @@
 # Node-Blog
 
-개인 미니 프로젝트
+개인 미니프로젝트
 
----
+------
 
-# **구현한 기능**
+## 목차
 
-로그인, 게시글 및 댓글 CRUD, 새 글 알람(Socket.IO), 파일 업로드
+1. 구현한 기능
+2. API
+3. 기술 리뷰
 
-API설계
 
-| 기능 | Method    | URL | request | response |
-| :-       | -    | :-: | -:      | -:       |
-| 메인페이지  | GET | / |  | 메인 페이지 |
-|          | GET | /api/list |  | 게시글 목록(제목, 작성자, 작성일) |
-| 글쓰기     | GET | /post | | 게시글 작성 페이지 |
-|          | POST | /api/post | {title, write, password, content} | 게시글 작성 처리 후 성공 여부 |
-| 상세 페이지 | GET | /detail/:id |  | 게시글 상세 페이지 |
-|          | GET | /api/detail/:id |  | 해당 글 데이터(제목, 작성자, 작성일, 내용) |
-| 수정 페이지 | GET | /update/:id |  | 게시글 수정 페이지 |
-|          | GET | /api/update/:id |  | 수정을 위한 글 정보(제목, 작성자, 내용) |
-|          | PUT | /api/update/:id | { password } | 패스워드 확인 후 수정 |
-|          | DELETE | /api/delete/:id | { password } | 패스워드 확인 후 삭제 |
 
-ㄴㅇㄴㅇㄴㅇㄴㅇ
+## 구현한 기능
+
+로그인 & 회원가입
+
+게시글 및 댓글 CRUD
+
+새글 알람 (Socket.io)
+
+파일 업로드
+
+
+
+## API
+
+| 기능                     | Method | URL                              | Request                                                      | Response                                                     |
+| ------------------------ | ------ | -------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 회원가입                 | POST   | /api/users                       | nickname,<br />email,<br />password,<br />confirmPassword    | 오류시 status(400)                                           |
+|                          | GET    | /register                        |                                                              | 회원가입 페이지                                              |
+| 로그인                   | POST   | /api/auth                        | email,<br />password                                         | token                                                        |
+|                          | GET    | /                                |                                                              | 로그인 페이지                                                |
+| 유저 인증                | GET    | /api/users/me                    | token                                                        |                                                              |
+| Home 화면                | GET    | /api/blogs                       | category                                                     | blog_list                                                    |
+| Home - 댓글 많은 순 정렬 | GET    | /api/blogs_sort_review           | category                                                     | blog_list                                                    |
+|                          | GET    | /home                            |                                                              | 홈페이지                                                     |
+| 상세페이지               | GET    | /api/blogs/:blogsId              | params                                                       | detail                                                       |
+|                          | GET    | /detail                          |                                                              | 상세 페이지                                                  |
+| 게시글 저장              | POST   | /api/save                        | name,<br />content,<br />token                               | names808 <br />- 닉네임<br />-  게시글번호<br />- 게시글 제목 |
+|                          | GET    | /write                           |                                                              | 게시글 작성 페이지                                           |
+| 게시글 수정              | POST   | /api/fix_save                    | goodsId,<br />name,<br />person,<br />content,<br />category |                                                              |
+| 게시글 버튼 보이기       | POST   | /api/comment_fix_button/:blogsId | params, token                                                | "O"-인증성공<br />"X"-인증실패                               |
+|                          | GET    | /fix                             |                                                              | 수정 페이지                                                  |
+| 댓글 저장                | POST   | /api/comment_save/:blogsId       | params, comment                                              | names<br />- 닉네임<br />- 제목                              |
+| 댓글 보여주기            | GET    | /api/comment/:blogsId            | params                                                       | comment_detail                                               |
+| 댓글 삭제하기            | POST   | /api/delete_comment/:blogsId     | comment_Delete_Id,<br />nickname_check,<br />token           | "O" - 인증성공<br />"X" - 인증실패                           |
+| 댓글 수정                | POST   | /api/show_fix_comments           | comment_Delete_Id, <br />nickname_check, <br />token         | comment_fix_receive - 인증 성공<br />"X" - 인증실패          |
+| 댓글 수정 저장           | POST   | /api/save_fix_comments           | comment,<br />comment_Delete_ID,<br />nickname_check,<br />token | "O" - 인증성공<br />"X" - 인증실패                           |
+|                          |        |                                  |                                                              |                                                              |
+|                          |        |                                  |                                                              |                                                              |
+|                          |        |                                  |                                                              |                                                              |
+|                          |        |                                  |                                                              |                                                              |
+|                          |        |                                  |                                                              |                                                              |
+|                          |        |                                  |                                                              |                                                              |
+
+
+
+
+
+기술 리뷰
+
+
+
+
+
+
+
+
+
