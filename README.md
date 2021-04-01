@@ -8,11 +8,15 @@
 
 1. 구현한 기능
 2. API
-3. 기술 리뷰
+3. 코드 셀프 리뷰
 
 
 
 ## 구현한 기능
+
+<details>
+<summary> </summary>
+<div markdown="1">  
 
 로그인 & 회원가입
 
@@ -21,6 +25,9 @@
 새글 알람 (Socket.io)
 
 파일 업로드
+
+</div>
+</details>
 
 
 
@@ -62,6 +69,11 @@
 ## 코드 셀프 리뷰
 
 ### 로그인 & 회원가입&유저인증
+
+<details>
+<summary></summary>
+<div markdown="1">       
+
 
 ```js
 const postUsersSchema = Joi.object({
@@ -141,9 +153,16 @@ url : api/users/me
 
 이 부분을 유저인증이 필요할 때마다 사용하였다.
 
+</div>
+</details>
+
 
 
 ### 게시글 수정 버튼 보이기 / 안 보이기
+
+<details>
+<summary></summary>
+<div markdown="1">    
 
 ```js
 router.post("/comment_fix_button/:blogsId", async (req, res) => {
@@ -171,9 +190,15 @@ router.post("/comment_fix_button/:blogsId", async (req, res) => {
 3. 만약 blogs의 db에 저장된 닉네임 값과 토큰을 verify한 닉네임값이 동일하면 O를 아니면 X를 보낸다.
 4. 클라이언트에서 O를 응답받으면 display:block, X를 받으면 display:none;을 처리한다.
 
+</div>
+</details>
 
 
 ### 댓글
+
+<details>
+<summary></summary>
+<div markdown="1">    
 
 ```js
 // 댓글을 저장한다.
@@ -223,9 +248,15 @@ router.post("/comment_save/:blogsId", async (req, res, next) => {
 
 이렇게 DB를 2~3개 동시에 이용해보는데, 하나로만 이용하는 좋은 방법이 없을까 고민하게 됐다.
 
+</div>
+</details>
 
 
 ### 댓글 & 새글 실시간 알람
+
+<details>
+<summary></summary>
+<div markdown="1">   
 
 서버쪽
 
@@ -282,8 +313,15 @@ io.on("connection", (sock) => {
 4. 클라이언트에서 "SAVE_REVIEW"를 받고, 받아온 변수를 makeBuyNotification 함수에 인자로 넣고 발동시킨다.
 
 
+</div>
+</details>
+
 
 ### 게시글 저장 & 파일 업로드
+
+<details>
+<summary></summary>
+<div markdown="1">       
 
 ```js
 router.post("/save", upload.single('file'), async (req, res, next) => {
@@ -341,9 +379,15 @@ router.post("/save", upload.single('file'), async (req, res, next) => {
 5. 여기서 file_name은 이름값만 저장해둔다. (추후에 상세 페이지에 그 이름을 따와서 뿌려줄거기 때문에 이름값이 필요할 거라 생각했다.)
 6. 실시간 알람을 해줘야하기 때문에, 그 정보를 받아갈 names808을 정해두고, 클라이언트에 뿌려줬다.
 
+</div>
+</details>
 
 
 DB설계
+
+<details>
+<summary></summary>
+<div markdown="1">  
 
 몽고DB를 사용했다.
 
@@ -374,3 +418,6 @@ users
 - email : 로그인 할 때 쓰이는 이메일
 - nickname : 글 작성, 댓글 등에 보이는 닉네임
 - password : 비밀번호
+
+</div>
+</details>
