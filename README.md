@@ -60,10 +60,9 @@
 
 ## 코드 셀프 리뷰
 
-### 로그인 & 회원가입&유저인증
-
 <details>
-<summary></summary>
+<summary>로그인 & 회원가입&유저인증
+</summary>
 <div markdown="1">       
 
 
@@ -150,10 +149,8 @@ url : api/users/me
 
 
 
-### 게시글 수정 버튼 보이기 / 안 보이기
-
 <details>
-<summary></summary>
+<summary>게시글 수정 버튼 보이기 / 안 보이기</summary>
 <div markdown="1">    
 
 ```js
@@ -186,10 +183,8 @@ router.post("/comment_fix_button/:blogsId", async (req, res) => {
 </details>
 
 
-### 댓글
-
 <details>
-<summary></summary>
+<summary>댓글</summary>
 <div markdown="1">    
 
 ```js
@@ -244,10 +239,8 @@ router.post("/comment_save/:blogsId", async (req, res, next) => {
 </details>
 
 
-### 댓글 & 새글 실시간 알람
-
 <details>
-<summary></summary>
+<summary>댓글 & 새글 실시간 알람</summary>
 <div markdown="1">   
 
 서버쪽
@@ -309,10 +302,8 @@ io.on("connection", (sock) => {
 </details>
 
 
-### 게시글 저장 & 파일 업로드
-
 <details>
-<summary></summary>
+<summary>게시글 저장 & 파일 업로드</summary>
 <div markdown="1">       
 
 ```js
@@ -375,10 +366,8 @@ router.post("/save", upload.single('file'), async (req, res, next) => {
 </details>
 
 
-### DB설계
-
 <details>
-<summary></summary>
+<summary>DB설계</summary>
 <div markdown="1">  
 
 몽고DB를 사용했다.
