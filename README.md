@@ -10,6 +10,17 @@
 
 API설계
 
-[제목 없음](Node-Blog%2013a7c63833ee40f78fbc24989eb96b9e/%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%20%E1%84%8B%E1%85%A5%E1%86%B9%E1%84%82%E1%85%B3%E1%86%AB%20%E1%84%83%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%90%E1%85%A5%E1%84%87%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%89%E1%85%B3%208ded5671a73042aa8b384e585dee6993.csv)
+| 기능 | Method    | URL | request | response |
+| :-       | -    | :-: | -:      | -:       |
+| 메인페이지  | GET | / |  | 메인 페이지 |
+|          | GET | /api/list |  | 게시글 목록(제목, 작성자, 작성일) |
+| 글쓰기     | GET | /post | | 게시글 작성 페이지 |
+|          | POST | /api/post | {title, write, password, content} | 게시글 작성 처리 후 성공 여부 |
+| 상세 페이지 | GET | /detail/:id |  | 게시글 상세 페이지 |
+|          | GET | /api/detail/:id |  | 해당 글 데이터(제목, 작성자, 작성일, 내용) |
+| 수정 페이지 | GET | /update/:id |  | 게시글 수정 페이지 |
+|          | GET | /api/update/:id |  | 수정을 위한 글 정보(제목, 작성자, 내용) |
+|          | PUT | /api/update/:id | { password } | 패스워드 확인 후 수정 |
+|          | DELETE | /api/delete/:id | { password } | 패스워드 확인 후 삭제 |
 
 ㄴㅇㄴㅇㄴㅇㄴㅇ
