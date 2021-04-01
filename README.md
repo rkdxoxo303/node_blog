@@ -63,7 +63,7 @@
 
 ### 로그인 & 회원가입&유저인증
 
-```
+```js
 const postUsersSchema = Joi.object({
   nickname: Joi.string().min(2).max(30).required(),
   email: Joi.string().email().required(),
