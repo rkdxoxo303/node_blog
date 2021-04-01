@@ -192,6 +192,9 @@ router.post("/comment_fix_button/:blogsId", async (req, res) => {
 <details>
 <summary>댓글</summary>
 <div markdown="1">    
+  
+  ![image](https://user-images.githubusercontent.com/78591345/113245854-c765a380-92f2-11eb-9dc9-adc47c36a6e1.PNG)
+  ![image](https://user-images.githubusercontent.com/78591345/113245859-c7fe3a00-92f2-11eb-800c-f0cdfb9ebdd6.PNG)
 
 ```js
 // 댓글을 저장한다.
