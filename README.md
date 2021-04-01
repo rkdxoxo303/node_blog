@@ -23,8 +23,9 @@
 파일 업로드
 
 
-
-## API
+<details>
+## <summary> API </summary>
+ <div markdown="1">
 
 | 기능                     | Method | URL                              | Request                                                      | Response                                                     |
 | ------------------------ | ------ | -------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -47,20 +48,22 @@
 | 댓글 보여주기            | GET    | /api/comment/:blogsId            | params                                                       | comment_detail                                               |
 | 댓글 삭제하기            | POST   | /api/delete_comment/:blogsId     | comment_Delete_Id,<br />nickname_check,<br />token           | "O" - 인증성공<br />"X" - 인증실패                           |
 | 댓글 수정                | POST   | /api/show_fix_comments           | comment_Delete_Id, <br />nickname_check, <br />token         | comment_fix_receive - 인증 성공<br />"X" - 인증실패          |
-| 댓글 수정 저장           | POST   | /api/save_fix_comments           | comment,<br />comment_Delete_ID,<br />nickname_check,<br />token | "O" - 인증성공<br />"X" - 인증실패                           |
-|                          |        |                                  |                                                              |                                                              |
-|                          |        |                                  |                                                              |                                                              |
-|                          |        |                                  |                                                              |                                                              |
-|                          |        |                                  |                                                              |                                                              |
-|                          |        |                                  |                                                              |                                                              |
-|                          |        |                                  |                                                              |                                                              |
+| 댓글 수정 저장           | POST   | /api/save_fix_comments           | comment,<br />comment_Delete_ID,<br />nickname_check,<br />token | "O" - 인증성공<br />"X" - 인증실패       
 
-
+</div>
+</details>
 
 
 
 기술 리뷰
+<details>
+<summary>여기를 눌러주세요</summary>
+<div markdown="1">       
 
+😎숨겨진 내용😎
+
+</div>
+</details>
 
 
 
