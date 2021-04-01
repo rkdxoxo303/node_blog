@@ -11,11 +11,11 @@ http://3.35.175.76/home
 
 1. 구현한 기능
 2. API
-3. 코드 셀프 리뷰
+3. 코드 리뷰
 
 
 
-## 구현한 기능
+## 1. 구현한 기능
 
 로그인 & 회원가입
 
@@ -27,7 +27,7 @@ http://3.35.175.76/home
 
 
 
-## API
+## 2. API
 <details> <summary> </summary> <div markdown="1">     
 
 
@@ -60,7 +60,7 @@ http://3.35.175.76/home
 </details>
 
 
-## 코드 셀프 리뷰
+## 3. 코드 리뷰
 
 <details>
 <summary>로그인 & 회원가입&유저인증
