@@ -1,5 +1,6 @@
 # Node-Blog
 개인 미니프로젝트
+(서버는 AWS EC2 와 FileZilla 이용, 배포는 PM2로 배포)
 
 http://3.35.175.76/home
 
