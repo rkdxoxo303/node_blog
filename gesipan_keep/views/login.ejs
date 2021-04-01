@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>태진 블로그 :: 로그인</title>
+
+    <!-- 부트스트랩 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+
+    <!-- j쿼리 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <!-- 구글폰트 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Serif+KR&family=Stylish&display=swap"
+        rel="stylesheet" />
+
+
+    <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+    <script src="/api.js"></script>
+
+    <!-- font-family: 'Black Han Sans', sans-serif; -->
+    <!-- font-family: 'Noto Serif KR', serif; -->
+    <!-- font-family: 'Stylish', sans-serif; -->
+
+
+
+    <style>
+        .alert-sparta {
+            color: white;
+            background-color: black;
+            border-color: #ffcde7;
+            height: 100px;
+        }
+
+        .alert-sparta .alert-link {
+            color: #4900f3;
+        }
+
+        .jumbotron {
+            border-radius: 0;
+        }
+
+        .input-group-text {
+            border-right-color: white;
+            background-color: white;
+        }
+
+        .input-group>input {
+            border-left-color: white;
+        }
+
+        :root {
+            --input-padding-x: 1.5rem;
+            --input-padding-y: 0.75rem;
+        }
+
+        .login,
+        .image {
+            min-height: 100vh;
+        }
+
+        .bg-image {
+            background-image: url('https://1.bp.blogspot.com/-k7S6IoStwUY/YGJFcgESkOI/AAAAAAAAAT8/JK4ecPr-r1kwkHEB0Sc7s3PjRGSw3JkXgCLcBGAsYHQ/s465/sad.PNG');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .login-heading {
+            font-weight: 300;
+        }
+
+        .btn-login {
+            font-size: 0.9rem;
+            letter-spacing: 0.05rem;
+            padding: 0.75rem 1rem;
+            border-radius: 2rem;
+        }
+
+        .form-label-group {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .form-label-group>input,
+        .form-label-group>label {
+            padding: var(--input-padding-y) var(--input-padding-x);
+            height: auto;
+            border-radius: 2rem;
+        }
+
+        .form-label-group>label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            margin-bottom: 0;
+            /* Override default `<label>` margin */
+            line-height: 1.5;
+            color: #495057;
+            cursor: text;
+            /* Match the input under the label */
+            border: 1px solid transparent;
+            border-radius: .25rem;
+            transition: all .1s ease-in-out;
+        }
+
+        .form-label-group input::-webkit-input-placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input:-ms-input-placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input::-ms-input-placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input::-moz-placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input::placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input:not(:placeholder-shown) {
+            padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+            padding-bottom: calc(var(--input-padding-y) / 3);
+        }
+
+        .form-label-group input:not(:placeholder-shown)~label {
+            padding-top: calc(var(--input-padding-y) / 3);
+            padding-bottom: calc(var(--input-padding-y) / 3);
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* Fallback for Edge
+-------------------------------------------------- */
+
+        @supports (-ms-ime-align: auto) {
+            .form-label-group>label {
+                display: none;
+            }
+
+            .form-label-group input::-ms-input-placeholder {
+                color: #777;
+            }
+        }
+
+        /* Fallback for IE
+-------------------------------------------------- */
+
+        @media all and (-ms-high-contrast: none),
+        (-ms-high-contrast: active) {
+            .form-label-group>label {
+                display: none;
+            }
+
+            .form-label-group input:-ms-input-placeholder {
+                color: #777;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="top_alert" style="text-align:center;"> </div>
+    <div class="modal text-left" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="alertModalLabel" style="font-family: 'Black Han Sans', sans-serif;">알림
+                    </h5>
+                </div>
+                <div class="modal-body" id="alertText" style="font-family: 'Noto Serif KR', serif;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-sparta" data-dismiss="modal">
+                        확인
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="modal text-left" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel"
+        aria-hidden="true"></div>
+    <div class="container-fluid">
+        <div class="row no-gutter">
+            <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+            <div class="col-md-8 col-lg-6">
+                <div class="login d-flex align-items-center py-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-9 col-lg-8 mx-auto">
+                                <h3 class="login-heading mb-4" style="font-family: 'Black Han Sans', sans-serif;">
+                                    <span style="color:hotpink">TJ</span>
+                                    blog Login
+                                </h3>
+                                <form>
+                                    <div class="form-label-group">
+                                        <input type="text" id="inputEmail" class="form-control"
+                                            placeholder="Email address">
+                                        <label for="inputEmail">Email address</label>
+                                    </div>
+
+                                    <div class="form-label-group">
+                                        <input type="password" id="inputPassword" class="form-control"
+                                            placeholder="Password">
+                                        <label for="inputPassword">Password</label>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <label class="custom-control-label" for="customCheck1"
+                                            style="font-family: 'Stylish', sans-serif;">행복하세요^^</label>
+                                    </div>
+                                    <button
+                                        class="btn btn-lg btn-dark btn-block btn-login text-uppercase font-weight-bold mb-2"
+                                        type="button" style="font-family: 'Stylish', sans-serif;"
+                                        onclick="window.location.href='/register'">회원가입</button>
+                                    <button
+                                        class="btn btn-lg btn-info btn-block btn-login text-uppercase font-weight-bold mb-2"
+                                        type="button" style="width:250px; font-family: 'Stylish', sans-serif;"
+                                        onclick="sign_in()">로그인</button>
+                                    <div class="text-center">
+                                        <a class="small"
+                                            href="https://www.nike.com/kr/ko_kr/t/women/fw/running/CT2423-100/gdib26/w-nike-react-infinity-run-fk-2?utm_source=Naver&utm_medium=PS&utm_campaign=365DIGITAL_Naver_SP_Shopping_all_PC&cp=24588836459_sh_&n_media=27758&n_query=%EB%A6%AC%EC%95%A1%ED%8A%B8&n_rank=1&n_ad_group=grp-a001-02-000000006515874&n_ad=nad-a001-02-000000119915880&n_campaign_type=2&n_mall_pid=CT2423-100&n_ad_group_type=2&NaPm=ct%3Dkmv3x0kg%7Cci%3D0Aa0001ifQ9ui0ptkLkR%7Ctr%3Dpla%7Chk%3D43d71838b670bc8e2153704a5687e99528b32ec7">리액트
+                                            파이팅^^</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="/home">로그인 없이
+                                            들어가기^^</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+        integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+        crossorigin="anonymous"></script>
+
+    <script src="/api.js"></script>
+    <script>
+
+        // 소켓
+        const socket = io.connect('/')
+
+        socket.on('SAVE_REVIEW', function (data) {
+            const { nickname, goodsId, goodsName, date } = data
+            makeBuyNotification(nickname, goodsName, goodsId, date)
+        })
+
+        function initAuthenticatePage() {
+            socket.emit('CHANGED_PAGE', `${location.pathname}${location.search}`)
+        }
+
+        function bindSamePageViewerCountEvent(callback) {
+            socket.on('SAME_PAGE_VIEWER_COUNT', callback)
+        }
+
+        function postOrder(nickname, boardname) {
+            socket.emit('SAVE', {
+                nickname: nickname,
+                goodsId: blogsId,
+                goodsName: boardname
+            })
+        }
+
+        function makeBuyNotification(targetNickname, goodsName, goodsId, date) {
+            const messageHtml = `<span style="color:hotpink; font-family: 'Stylish', sans-serif;">${targetNickname}</span>
+            <span style="font-family: 'Stylish', sans-serif;">님이 방금 <a href="/detail?goodsId=${goodsId}" class="alert-link">${goodsName}</a>에 새로운 글을 남겼어요! <br /><small>(${date})</small>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>`
+            const alt = $('#customerAlert')
+            if (alt.length) {
+                alt.html(messageHtml)
+            } else {
+                const htmlTemp = `<div class="alert alert-sparta alert-dismissible show fade" role="alert" id="customerAlert">${messageHtml}</div>`
+                $('#top_alert').append(htmlTemp)
+            }
+        }
+        // 소켓
+
+        if (localStorage.getItem("token")) {
+            getSelf(function () {
+                alert("이미 로그인이 되어있습니다.");
+                window.location.replace("/home");
+            });
+        }
+
+        function sign_in() {
+            let email = $("#inputEmail").val();
+            let password = $("#inputPassword").val();
+            console.log(email)
+            console.log(password)
+            $.ajax({
+                type: "POST",
+                url: "/api/auth",
+                data: {
+                    email: email,
+                    password: password,
+                },
+                success: function (response) {
+                    localStorage.setItem("token", response.token);
+                    window.location.replace("/home");
+                },
+                error: function (error) {
+                    customAlert(error.responseJSON.errorMessage);
+                },
+            });
+        }
+
+        function customAlert(text) {
+            $("#alertText").text(text);
+            $("#alertModal").modal("show");
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+
+    <!-- j쿼리 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <!-- 구글폰트 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Serif+KR&family=Stylish&display=swap"
+        rel="stylesheet">
+    <link href="/mystyle.css" rel="stylesheet" />
+    <!-- font-family: 'Black Han Sans', sans-serif; -->
+    <!-- font-family: 'Noto Serif KR', serif; -->
+    <!-- font-family: 'Stylish', sans-serif; -->
+    <style>
+        .alert-sparta {
+            color: white;
+            background-color: black;
+            border-color: #ffcde7;
+            height: 100px;
+        }
+
+        .alert-sparta .alert-link {
+            color: #4900f3;
+        }
+
+
+
+        .alert {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            margin-bottom: 0;
+            width: 100%;
+        }
+
+        @media screen and (min-width: 576px) {
+            .alert {
+                width: fit-content;
+                max-width: 480px;
+            }
+        }
+
+        .alert-sparta {
+            color: white;
+            background-color: black;
+            border-color: #ffcde7;
+            height: 100px;
+        }
+
+        .alert-sparta .alert-link {
+            color: #4900f3;
+        }
+
+
+        .login_Btn:hover {
+            cursor: pointer;
+            color: black;
+            background: white;
+            border-radius: 4px;
+            text-decoration: none;
+            transform: scale(2.0);
+            transition: transform 200ms ease-in-out;
+        }
+
+
+
+        .logo_Btn:hover {
+            transform: translateY(6px) rotate(1turn);
+            transition: all 500ms ease-in-out;
+        }
+
+        html,
+        body,
+        div,
+        span,
+        applet,
+        object,
+        iframes,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+
+        p,
+        blockquote,
+        pre,
+        a,
+        abbr,
+        acronym,
+        address,
+        big,
+        quotes,
+        code,
+        del,
+
+        dfn,
+        em,
+        img,
+        ins,
+        kbd,
+        q,
+        s,
+        samp,
+        small,
+        strike,
+        sub,
+        sup,
+        tt,
+        var,
+        u,
+
+        i,
+        center,
+        dl,
+        dt,
+        dd,
+        ol,
+        ul,
+        li,
+        fieldset,
+        form,
+        label,
+        legend,
+        table,
+
+        caption,
+        tbody,
+        tfoot,
+        thead,
+        tr,
+        th,
+        td,
+        article,
+        aside,
+        canvas,
+
+        details,
+        embed,
+        figure,
+        figcaption,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+
+        output,
+        ruby,
+        section,
+        summary,
+        time,
+        mark,
+        audio,
+        video {
+
+            margin: 0;
+
+            padding: 0;
+
+            border: 0;
+
+            font-size: 100%;
+
+            do: inherit;
+
+            vertical-align: baseline;
+
+        }
+
+
+
+        article,
+        aside,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        hgroup,
+
+        menu,
+        nav,
+        section {
+
+            display: block;
+
+        }
+
+
+
+        blockquote,
+        q {
+
+            quotes: none;
+
+        }
+
+
+        /* 
+blockquote : before, blockquote : after, q : before, q : after {
+
+	content: '';
+	content: none;
+} */
+
+
+        table {
+
+            border-collapse: collapse;
+
+            border-spacing: 0;
+
+        }
+
+        /*css 초기화*/
+
+
+
+        .card {
+
+            height: 400px;
+
+            width: 350px;
+
+            border-radius: 15px;
+
+            display: inline-block;
+
+            margin-top: 30px;
+
+            margin-left: 30px;
+
+            margin-bottom: 30px;
+
+            position: relative;
+
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+            overflow: hidden;
+
+        }
+
+
+
+        .card-header {
+
+            -webkit-transition: 0.5s;
+            /*사파리 & 크롬*/
+
+            -moz-transition: 0.5s;
+            /*파이어폭스*/
+
+            -ms-transition: 0.5s;
+            /*인터넷 익스플로러*/
+
+            -o-transition: 0.5s;
+            /*오페라*/
+
+            transition: 0.5s;
+
+            width: 100%;
+
+            height: 270px;
+
+            border-radius: 15px 15px 0 0;
+
+            background-image: url("images/korea.jpeg");
+
+            background-size: 100% 280px;
+
+            background-repeat: no-repeat;
+
+        }
+
+
+
+        .card:hover .card-header {
+
+            opacity: 0.8;
+
+            height: 100px;
+
+        }
+
+
+
+        .card-header-is_closed {
+
+            background-color: #000000;
+
+            color: #FFF;
+
+            font-weight: bold;
+
+            text-align: center;
+
+            float: right;
+
+            margin: 15px 15px 0 0;
+
+            border-radius: 50%;
+
+            font-weight: bold;
+
+            padding: 10px 10px;
+
+            line-height: 20px;
+
+        }
+
+
+
+        h1 {
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+        }
+
+
+
+        .card-body {}
+
+
+
+        .card-body-header {
+
+            line-height: 25px;
+
+            margin: 10px 20px 0px 20px;
+
+        }
+
+
+
+        .card-body-description {
+
+            opacity: 0;
+
+            color: #757B82;
+
+            line-height: 25px;
+
+            -webkit-transition: .2s ease-in-out;
+            /*사파리&크롬*/
+
+            -moz-transition: .2s ease-in-out;
+            /*파이어폭스*/
+
+            -ms-transition: .2s ease-in-out;
+            /*익스플로러*/
+
+            -o-transition: .2s ease-in-out;
+            /*오페라*/
+
+            transition: .2s ease-in-out;
+
+            overflow: hidden;
+
+            height: 180px;
+
+            margin: 5px 20px;
+
+        }
+
+
+
+        .card:hover .card-body-description {
+
+            opacity: 1;
+
+            -webkit-transition: .5s ease-in-out;
+
+            -moz-transition: .5s ease-in-out;
+
+            -ms-transition: .5s ease-in-out;
+
+            -o-transition: .5s ease-in-out;
+
+            transition: .5s ease-in-out;
+
+        }
+
+
+
+        .card-body-hashtag {
+
+            color: #2478FF;
+
+            font-style: italic;
+
+        }
+
+
+
+        .card-body-footer {
+
+            position: absolute;
+
+            margin-top: 15px;
+
+            margin-bottom: 6px;
+
+            bottom: 0;
+
+            width: 314px;
+
+            font-size: 14px;
+
+            color: #9FA5A8;
+
+            padding: 0 15px;
+
+        }
+
+
+
+        .icon {
+
+            display: inline-block;
+
+            vertical-align: middle;
+
+            margin-right: 2px;
+
+        }
+
+
+
+        .icon-view_count {
+
+            width: 25px;
+
+            height: 17px;
+
+            background: url("images/eye.jpg") no-repeat;
+
+        }
+
+
+
+        .icon-comments_count {
+
+            margin-left: 5px;
+
+            width: 25px;
+
+            height: 17px;
+
+            background: url("images/comment.jpg") no-repeat;
+
+        }
+
+
+
+        .reg_date {
+
+            float: right;
+
+        }
+    </style>
+
+    <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+    <script src="api.js"></script>
+</head>
+
+<body>
+    <div style="text-align:center; margin:auto;">
+        <!-- <div class="form-group row mr-0">
+            <label for="categorySelect" class="col-4 col-form-label"></label>
+            <select class="form-control col-8" id="categorySelect">
+                <option value="name" selected>제목</option>
+                <option value="person">작성자</option>
+                <option value="day">날짜</option>
+                <input type=text> <button>조회하기</button><br> -->
+        </select>
+    </div>
+    <div style="background-color:pink;  margin-top:20px; text-align:center;  display:block;" id="nav">
+        <button onclick="writeNow()" class="logo_Btn"
+            style="border:none; outline:none; background:none; font-size:50px; color:white; font-family: 'Black Han Sans', sans-serif;">글쓰기✍</button>
+    </div>
+
+    </div>
+    <!-- <select>
+        <option>정렬</option>
+        <option onchange="sort_review()">댓글</option>
+        <option val="2">댓2글</option>
+
+    </select> -->
+    </div>
+    <div style="text-align:center;">
+        <p style="font-family: 'Stylish', sans-serif; font-size:20px;">정렬</p>
+        <button onclick="sort_review()">댓글</button>
+        <button onclick="get_goods()">최신</button>
+        <button onclick="get_goods()">좋아요</button>
+    </div>
+    <!-- <button type="button" data-toggle="modal" data-target="#myModal">모달 시작</button> -->
+
+    <div id='card_list' style="margin:auto; text-align:center; padding:auto;">
+    </div>
+
+    <script>
+        // 소켓
+        const socket = io.connect('/')
+
+        socket.on('SAVE_REVIEW', function (data) {
+            const { nickname, goodsId, goodsName, date } = data
+            makeBuyNotification(nickname, goodsName, goodsId, date)
+        })
+
+        function initAuthenticatePage() {
+            socket.emit('CHANGED_PAGE', `${location.pathname}${location.search}`)
+        }
+
+        function bindSamePageViewerCountEvent(callback) {
+            socket.on('SAME_PAGE_VIEWER_COUNT', callback)
+        }
+
+        function postOrder(user, order) {
+            if (!order.length) {
+                return
+            }
+
+            socket.emit('SAVE', {
+                nickname: user.nickname,
+                goodsId: order[0].goods.goodsId,
+                goodsName:
+                    order.length > 1
+                        ? `${order[0].goods.name} 외 ${order.length - 1}개의 상품`
+                        : order[0].goods.name,
+            })
+        }
+
+        function makeBuyNotification(targetNickname, goodsName, goodsId, date) {
+            const messageHtml = `<span style="color:hotpink; font-family: 'Stylish', sans-serif;">${targetNickname}</span>
+            <span style="font-family: 'Stylish', sans-serif;">님이 방금 <a href="/detail?goodsId=${goodsId}" class="alert-link">${goodsName}</a>에 새로운 글을 남겼어요! <br /><small>(${date})</small>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>`
+            const alt = $('#customerAlert')
+            if (alt.length) {
+                alt.html(messageHtml)
+            } else {
+                const htmlTemp = `<div class="alert alert-sparta alert-dismissible show fade" role="alert" id="customerAlert">${messageHtml}</div>`
+                $('body').append(htmlTemp)
+            }
+        }
+
+        // 소켓
+        function writeNow() {
+            window.location.href = "/write";
+        }
+
+        function readNow() {
+            window.location.href = "/read";
+        }
+
+        //로그인
+        function loginNow() {
+            window.location.href = "/"
+        }
+
+        $(document).ready(function () {
+            check_login()
+        });
+
+        //로그인,로그아웃 버튼 체크하고 바꾸기
+        function check_login() {
+            token = localStorage.getItem("token");
+            if (token == null) {
+                let tempHtml = `<button onclick="loginNow()" class="login_Btn" id="login"
+      style="border:none; outline:none; background:none; font-size:20px; color:black;; font-family: 'Black Han Sans', sans-serif; float:right;">로그인</button>`
+                $('#nav').append(tempHtml)
+            } else {
+                let tempHtml = `<button onclick="logoutNow()" class="login_Btn" id="logut"
+      style="border:none; outline:none; background:none; font-size:20px; color:black;; font-family: 'Black Han Sans', sans-serif; float:right;">로그아웃</button>`
+                $('#nav').append(tempHtml)
+            }
+        }
+
+        // 로그아웃
+        function logoutNow() {
+            localStorage.clear();
+            window.location.href = "/home";
+        }
+
+        // db받아오는거 바로 시작하는건가봄
+        $(document).ready(function () {
+            get_goods()
+            $("#categorySelect").on("change", function () {
+                get_goods($(this).val())
+            })
+        })
+
+        // get으로 db 받아옴 // 최신순
+        function get_goods(category) {
+            $("#goodsList").empty()
+            $("#card_list").empty()
+
+            $.ajax({
+                type: "GET",
+                url: `/api/blogs${category ? "?category=" + category : ""}`,
+                data: {},
+                success: function (response) {
+                    let goods = response["blog_list"]
+                    for (let i = 0; i < goods.length; i++) {
+                        make_card(goods[i])
+                    }
+                }
+            })
+        }
+
+        // 리뷰 많은순 정렬
+        function sort_review() {
+            $("#goodsList").empty()
+            $("#card_list").empty()
+            $.ajax({
+                type: "GET",
+                url: `/api/blogs_sort_review`,
+                data: {},
+                success: function (response) {
+                    let goods = response["blog_list"]
+                    for (let i = 0; i < goods.length; i++) {
+                        make_card(goods[i])
+                    }
+                }
+            })
+        }
+
+        // 카드 만듦
+        // ${item["goodsId"]}, ${item["name"]} 등으로 db값받아오는 것 같음
+        function make_card(item) {
+            let htmlTemp = `
+            <div class="card" onclick="location.href='/detail?goodsId=${item["goodsId"]}'">
+                <div class="card-header">
+                    <img class="card-header" src="${item["file_name"]}">
+                            <div class="card-header-is_closed">
+                                <div style="font-family: 'Noto Serif KR', serif;"> 💬${item["comment_count"]}</div>
+                            </div>
+                        </div>
+                <div class="card-body">
+                    <div class="card-body-header">
+                                <h1 style="font-family: 'Noto Serif KR', serif;">${item["name"]}</h1>
+                                <p class="card-body-hashtag"></p>
+                                <p class="card-body-nickname" style="font-family: 'Noto Serif KR', serif;">
+                                    ${item["nickname"]}</p>
+                            </div>
+                    <p class="card-body-description" style="font-family: 'Noto Serif KR', serif;">
+                              ${item["content"]}
+                    </p>
+                    <div class="card-body-footer">
+                                <hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
+                                    <i class="reg_date" style="font-size:20px;">${item["day"]} </i>
+                    </div>
+                            </div>
+                        </div>
+    </div>`
+            $("#card_list").append(htmlTemp)
+        }
+    </script>
+</body>
+
+</html>

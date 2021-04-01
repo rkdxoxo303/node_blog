@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>게시글 작성</title>
+
+  <!-- 부트스트랩 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+
+  <!-- j쿼리 -->
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+
+  <!-- 구글폰트 -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Serif+KR&family=Stylish&display=swap"
+    rel="stylesheet" />
+  <!-- font-family: 'Black Han Sans', sans-serif; -->
+  <!-- font-family: 'Noto Serif KR', serif; -->
+  <!-- font-family: 'Stylish', sans-serif; -->
+
+  <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+  <script src="/api.js"></script>
+
+
+
+  <style>
+    .alert-sparta {
+      color: white;
+      background-color: black;
+      border-color: #ffcde7;
+      height: 100px;
+    }
+
+    .alert-sparta .alert-link {
+      color: #4900f3;
+    }
+
+    .logo_Btn:hover {
+      transform: translateY(6px) rotate(1turn);
+      transition: all 500ms ease-in-out;
+    }
+
+    .login_Btn:hover {
+      cursor: pointer;
+      color: black;
+      background: white;
+      border-radius: 4px;
+      text-decoration: none;
+      transform: scale(1.5);
+      transition: transform 200ms ease-in-out;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="
+        background-color: pink;
+        margin-top: 20px;
+        text-align: center;
+        display: block;
+      " id='nav'>
+    <button onclick="location.href='/home'" style="
+          border: none;
+          outline: none;
+          background: none;
+          font-size: 50px;
+          color: white;
+          font-family: 'Black Han Sans', sans-serif;
+        " class="logo_Btn">
+      Home
+    </button>
+
+    <div id="top_alert" style="text-align:center;"> </div>
+
+  </div>
+  <div style="text-align: center; margin-bottom: 20px">
+    <div class="mb-3" style="width: 200px; margin: auto">
+      <!-- <label for="exampleFormControlInput1" class="form-label" style="margin-top: 20px">주제</label>
+      <input style="width: 200px" type="email" class="form-control" id="cate" placeholder="주제" /> -->
+
+
+
+      <form enctype="multipart/form-data">
+        <div style="margin-bottom:20px;">
+          <span style="font-family: 'Noto Serif KR', serif; font-size:20px; margin-bottom:15px;">이미지 파일 선택!</span>
+          <input type="file" id="file" name="file" class="form-control"
+            style="font-family: 'Noto Serif KR', serif; font-size:15px; margin-bottom:20px;">
+        </div>
+
+
+
+
+        <span style="font-family: 'Noto Serif KR', serif; margin-bottom:20px;">
+          <div style="width:200px; background-color:grey">
+            <img id="image_section" src="#" alt="이미지 미리보기" style="width:200px; font-size:15px;" class="img-fluid">
+          </div>
+          <br>
+          <label for="exampleFormControlInput1" class="form-label" style="margin-top: 20px">제목</label>
+          <input style="width: 200px" type="text" class="form-control" id="name9" placeholder="제목" />
+
+
+    </div>
+
+    <div class="mb-3" style="text-align: center; margin-top: 30px">
+      <label for="exampleFormControlTextarea1" class="form-label">내용</label>
+      <textarea placeholder="내용을 입력해주세요." class="form-control" id="contents" rows="3"
+        style="width: 800px; height: 300px; margin: auto"></textarea>
+
+      <div></div>
+
+
+    </div>
+  </div>
+  <div style="width: 100px; margin: auto; display: block">
+    <button type="button" class="btn btn-primary" onclick="makeBoard()">
+      저장하기
+    </button>
+    </form>
+
+
+
+
+  </div>
+  <script>
+    // 소켓
+    const socket = io.connect('/')
+
+    socket.on('SAVE_REVIEW', function (data) {
+      const { nickname, goodsId, goodsName, date } = data
+      makeBuyNotification(nickname, goodsName, goodsId, date)
+    })
+
+    function initAuthenticatePage() {
+      socket.emit('CHANGED_PAGE', `${location.pathname}${location.search}`)
+    }
+
+    function bindSamePageViewerCountEvent(callback) {
+      socket.on('SAME_PAGE_VIEWER_COUNT', callback)
+    }
+
+    function postOrder(nickname, goodsId, name) {
+      socket.emit('SAVE', {
+        nickname: nickname,
+        goodsId: goodsId,
+        goodsName: name
+      })
+    }
+
+    function makeBuyNotification(targetNickname, goodsName, goodsId, date) {
+      const messageHtml = `<span style="color:hotpink; font-family: 'Stylish', sans-serif;">${targetNickname}</span>
+            <span style="font-family: 'Stylish', sans-serif;">님이 방금 <a href="/detail?goodsId=${goodsId}" class="alert-link">${goodsName}</a> 새로운 글을 남겼어요! <br /><small>(${date})</small>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>`
+      const alt = $('#customerAlert')
+      if (alt.length) {
+        alt.html(messageHtml)
+      } else {
+        const htmlTemp = `<div class="alert alert-sparta alert-dismissible show fade" role="alert" id="customerAlert">${messageHtml}</div>`
+        $('#top_alert').append(htmlTemp)
+      }
+    }
+
+    // 소켓
+
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $('#image_section').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    // 이벤트를 바인딩해서 input에 파일이 올라올때 위의 함수를 this context로 실행합니다.
+    $("#file").change(function () {
+      readURL(this);
+    });
+
+    //로그인
+    function loginNow() {
+      window.location.href = "/"
+    }
+
+    $(document).ready(function () {
+      check_login()
+    });
+
+    function check_login() {
+      token = localStorage.getItem("token");
+      if (token == null) {
+        let tempHtml = `<button onclick="loginNow()" class="login_Btn" id="login"
+      style="border:none; outline:none; background:none; font-size:20px; color:black;; font-family: 'Black Han Sans', sans-serif; float:right;">로그인</button>`
+        $('#nav').append(tempHtml)
+      } else {
+        let tempHtml = `<button onclick="logoutNow()" class="login_Btn" id="logut"
+      style="border:none; outline:none; background:none; font-size:20px; color:black;; font-family: 'Black Han Sans', sans-serif; float:right;">로그아웃</button>`
+        $('#nav').append(tempHtml)
+      }
+    }
+
+    // 로그아웃
+    function logoutNow() {
+      localStorage.clear();
+      window.location.href = "/home";
+    }
+
+    getSelf(function (u) {
+      user = u;
+      console.log(user);
+    });
+
+    function getSelf() {
+      $.ajax({
+        type: "GET",
+        url: "/api/users/me",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        success: function (response) {
+          // callback(response.user);
+          // console.log(response.user)
+        },
+        error: function (xhr, status, error) {
+          console.log(xhr.status); /// error
+          console.log(xhr);
+
+          if (xhr.status == 401) {
+            alert("로그인이 필요한 기능입니다");
+            location.href = "/";
+          } else {
+            localStorage.clear();
+            console.log(status);
+            alert("너 왜 여기 서 뜨니");
+            location.href = "/home";
+          }
+        },
+      });
+    }
+
+
+    function upup() {
+      let names = $("#name9").val();
+      let contents01 = $("#contents").val();
+      let cate = $("#cate").val();
+      $.ajax({
+        type: "POST",
+        url: "/api/save",
+        data: {
+          name: names,
+          content: contents01,
+          category: cate,
+          token: localStorage.getItem("token"),
+        },
+
+        success: function (response) {
+          alert("저장 완료!");
+          window.location.reload();
+          location.href = "/home";
+        },
+      });
+    }
+
+    function makeBoard() {
+
+      let formData = new FormData();
+      formData.append("name", $('#name9').val())
+      formData.append("content", $("#contents").val())
+      formData.append("file", $('#file')[0].files[0])
+      formData.append("token", localStorage.getItem("token"))
+
+      $.ajax({
+        type: "POST",
+        url: "/api/save",
+        processData: false, // 필수
+        contentType: false, // 필수
+
+        headers: { token: localStorage.getItem('token') },
+        data: formData,
+
+        success: function (response) {
+          nickname = response[0],
+            goodsId = response[1],
+            name99 = response[2],
+
+            postOrder(nickname, goodsId, name99);
+
+          alert("저장 완료!");
+          window.location.reload();
+          location.href = "/home";
+        },
+      });
+    };
+  </script>
+</body>
+
+</html>
