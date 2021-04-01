@@ -3,6 +3,8 @@
 
 http://3.35.175.76/home
 
+배포 :: 서버는 AWS EC2 와 FileZilla 이용, 배포는 PM2로 배포
+
 ![image](https://user-images.githubusercontent.com/78591345/113245864-c9c7fd80-92f2-11eb-8e8d-602bac970330.PNG)
 
 ------
