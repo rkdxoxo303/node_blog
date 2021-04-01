@@ -31,7 +31,8 @@
 
 
 
-## API <details> <summary> </summary> <div markdown="1">     
+## API
+<details> <summary> API </summary> <div markdown="1">     
 
 
 | 기능                     | Method | URL                              | Request                                                      | Response                                                     |
